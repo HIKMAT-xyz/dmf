@@ -459,8 +459,8 @@ def dump_publicv2():
 	to=[]
 	ttl_tar=[]
 	tlo=[]
+	idl=[]
 	lim = input(f"{garis} limit dump :"+H+" ")
-	print("")
 	token = open('token.txt','r').read()
 	cookie = open('cookie.txt','r').read()
 	coki = {"cookie":cookie}
@@ -468,7 +468,25 @@ def dump_publicv2():
 	oioo = json.loads(ka.text)
 	for fuck in oioo['friends']['data']:
 		tl.append(fuck['id'])
-	for idl in tl:
+	x=f"{P2}[01] id urutan new\n{P2}[02] id urutan old\n{P2}[03] id urutan random"
+	vprint(panel(x,style=f"{H3}"))
+	GlukTzy = input(garis+" pilih : "+H)
+	if GlukTzy in ['2','02']:
+		for bacot in tl:
+			idl.append(bacot)
+	elif GlukTzy in ['1','01']:
+		for bacot in tl:
+			idl.insert(0,bacot)
+	elif GlukTzy in ['3','03']:
+		for bacot in tl:
+			xx = random.randint(0,len(idl))
+			idl.insert(xx,bacot)
+	else:
+		jalan(garis+" isi yang benar")
+		exit()
+	print("")
+	#random_uidz()
+	for uik in idl:
 		try:
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
@@ -486,7 +504,7 @@ def dump_publicv2():
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
-			ciner = requests.get('https://graph.facebook.com/%s?access_token=%s'%(idl,token),cookies=coki).json()
+			ciner = requests.get('https://graph.facebook.com/%s?access_token=%s'%(uik,token),cookies=coki).json()
 			#token = open('token.txt','r').read()
 			#cookie = open('cookie.txt','r').read()
 			#coki = {"cookie":cookie}
@@ -500,7 +518,7 @@ def dump_publicv2():
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
-			cyna = requests.get('https://graph.facebook.com/%s?fields=friends.limit(90000)&access_token=%s'%(idl,token),cookies=coki)
+			cyna = requests.get('https://graph.facebook.com/%s?fields=friends.limit(90000)&access_token=%s'%(uik,token),cookies=coki)
 			eil = json.loads(cyna.text)
 			try:
 				for fuck in eil['friends']['data']:
@@ -513,9 +531,8 @@ def dump_publicv2():
 			#try:
 			except KeyError:
 				continue
-			x=f"{P2}┌─ ID : {idl}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK TARGET : {ciner['link']}\n└─ FRIENDS : {len(to)}"
+			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK TARGET : {ciner['link']}\n└─ FRIENDS : {len(to)}"
 			vprint(panel(x,style=f"{warna_warni_rich}"))
-			#print(P+'*-->',idl,' > friends >',len(to))
 			to.clear()
 		except KeyError:
 			print(K+'*--> '+M+'akun terspam')
@@ -538,8 +555,10 @@ def dump_followersv2():
 		login()
 	tl=[]
 	to=[]
+	ttl_tar=[]
+	tlo=[]
+	idl=[]
 	lim = input(f"{garis} limit dump :"+H+" ")
-	print("")
 	token = open('token.txt','r').read()
 	cookie = open('cookie.txt','r').read()
 	coki = {"cookie":cookie}
@@ -547,13 +566,57 @@ def dump_followersv2():
 	oioo = json.loads(ka.text)
 	for fuck in oioo['subscribers']['data']:
 		tl.append(fuck['id'])
-	for idl in tl:
+	x=f"{P2}[01] id urutan old\n{P2}[02] id urutan new\n{P2}[03] id urutan random"
+	vprint(panel(x,style=f"{H3}"))
+	GlukTzy = input(garis+" pilih : "+H)
+	if GlukTzy in ['2','02']:
+		for bacot in tl:
+			idl.append(bacot)
+	elif GlukTzy in ['1','01']:
+		for bacot in tl:
+			idl.insert(0,bacot)
+	elif GlukTzy in ['3','03']:
+		for bacot in tl:
+			xx = random.randint(0,len(idl))
+			idl.insert(xx,bacot)
+	else:
+		jalan(garis+" isi yang benar")
+		exit()
+	print("")
+	#random_uidz()
+	for uik in idl:
 		try:
-			
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
-			cyna = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(idl,token),cookies=coki)
+			xn = requests.Session().get('https://graph.facebook.com/%s?access_token=%s'%(id,token),cookies=coki)
+			x = json.loads(xn.text)
+			try:lok = x["locale"]
+			except (KeyError,IOError):
+				lok = "-"
+			coa = requests.get('https://graph.facebook.com/%s?access_token=%s'%(id,token),cookies=coki)
+			el = json.loads(coa.text)
+			try:lk = el["name"]
+			except (KeyError,IOError):
+				lk = "-"
+			token = open('token.txt','r').read()
+			cookie = open('cookie.txt','r').read()
+			coki = {"cookie":cookie}
+			ciner = requests.get('https://graph.facebook.com/%s?access_token=%s'%(uik,token),cookies=coki).json()
+			#token = open('token.txt','r').read()
+			#cookie = open('cookie.txt','r').read()
+			#coki = {"cookie":cookie}
+			#cyna = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(idl,token),cookies=coki)
+			#eil = json.loads(cyna.text)
+			#try:
+				#for fuck in eil['subscribers']['data']:
+					#tlo.append(fuck['id']+'|'+fuck['name'])
+			#except KeyError:
+				#continue
+			token = open('token.txt','r').read()
+			cookie = open('cookie.txt','r').read()
+			coki = {"cookie":cookie}
+			cyna = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(uik,token),cookies=coki)
 			eil = json.loads(cyna.text)
 			try:
 				for fuck in eil['subscribers']['data']:
@@ -565,13 +628,35 @@ def dump_followersv2():
 			#op = json.loads(u.text)
 			#try:
 			except KeyError:
-				print(P+" ["+M+" privat account/followers"+P+" ]")
-			print(P+'*-->',idl,' > followers >',len(to))
+				continue
+			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK TARGET : {ciner['link']}\n└─ FOLLOWERS : {len(to)}"
+			vprint(panel(x,style=f"{warna_warni_rich}"))
 			to.clear()
 		except KeyError:
 			print(K+'*--> '+M+'akun terspam')
+	print("")
+	x=f"{P2}salin hasil nya cokk biar gk ulang dump lagi!!"
+	vprint(panel(x,style=f"{H3}"))
 	input(f"{garis} enter untuk kembali")
 	menu()
+
+def random_uidz():
+	x=f"{P2}[01] id urutan old\n{P2}[02] id urutan new\n{P2}[03] id urutan random"
+	vprint(panel(x,style=f"{H3}"))
+	GlukTzy = input(garis+" pilih : "+H)
+	if GlukTzy in ['2','02']:
+		for bacot in tl:
+			idl.append(bacot)
+	elif GlukTzy in ['1','01']:
+		for bacot in tl:
+			idl.insert(0,bacot)
+	elif GlukTzy in ['3','03']:
+		for bacot in tl:
+			xx = random.randint(0,len(idl))
+			idl.insert(xx,bacot)
+	else:
+		jalan(garis+" isi yang benar")
+		random_uidz()
 
 def check_ingfo_akun():
 	idt=[]
