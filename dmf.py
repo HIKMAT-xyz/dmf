@@ -161,7 +161,6 @@ def login_cookie():
 	with requests.Session() as xyz:
 		try:
 			jalan(f"{garis} sedang proses mohon tunggu ")
-			#lod()
 			get_tok = xyz.get(url_businness+'/business_locations',headers = {"user-agent":ua_business,"referer": web_fb,"host": "business.facebook.com","origin": url_businness,"upgrade-insecure-requests" : "1","accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7","cache-control": "max-age=0","accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8","content-type":"text/html; charset=utf-8"},cookies = {"cookie":cookie})
 			token = re.search("(EAAG\w+)", get_tok.text).group(1)
 			open('cookie.txt','w').write(cookie) 
@@ -228,7 +227,7 @@ def menu():
 	x=f"{P2} ┌─ selamat datang {K2}{nama}\n{P2} │ └─ tanggal lahirmu : {H2}{pko}\n{P2} │ └─ ID kamu : {H2}{tumbal_id}\n{P2} │ └─ IP kamu : {H2}{IP}\n{P2} │ ┌─ negara kamu : {H2}{nibba}\n{P2} └─ tanggal sekarang : {H2}{sekarang}"
 	vprint(panel(x,style=f"{H3}"))
 	print("")
-	x=f"{P2}[01] dump id public\n{P2}[02] dump id followers\n{P2}[03] dump id post likes\n{P2}[04] dump id public v2\n{P2}[05] dump id followers v2\n{P2}[06] check info akun target\n{P2}[07] beri tanggapan script ini\n{P2}[08] report bug script\n{P2}[{M2}00{P2}] exit/hapus cookie"
+	x=f"{P2}[01] dump id public\n{P2}[02] dump id followers\n{P2}[03] dump id post likes\n{P2}[04] dump id public v2\n{P2}[05] dump id followers v2\n{P2}[06] check info akun target\n{P2}[07] beri tanggapan script ini\n{P2}[08] report bug script\n{P2}[09] tracked ip\n{P2}[{M2}00{P2}] exit/hapus cookie"
 	vprint(panel(x,style=f"{H3}"))
 	hikmat = input(f"{garis} pilih : {H}")
 	if hikmat in ["1","01"]:
@@ -320,6 +319,11 @@ def menu():
 		os.system('xdg-open https://wa.me/+6282115413282?text=bang+script+mu+itu+ada+yang+error!!')
 		input(f" {P}[{H}•{P}] kembali")
 		menu()
+	elif hikmat in ["9","09"]:
+		print("")
+		x=f"{P2}[01] tracked ip sendiri\n[02] tracked ip target\n{P2}[{M2}00{P2}] kembali"
+		vprint(panel(x,style=f"{H3}"))
+		pilpil()
 	elif hikmat in ["0","00"]:
 		print("")
 		x=f"{P2}[01] hapus cookie\n{P2}[02] exit\n{P2}[{H2}00{P2}] kembali"
@@ -352,6 +356,108 @@ def menu():
 		print("")
 		jalan(f"{garis} isi yang benar ")
 		menu()
+			
+def pilpil():
+	hikmatz = input(f"{garis} pilih : {H}")
+	if hikmatz in ["1","01"]:
+		tracked_sendiri()
+	elif hikmatz in ["2","02"]:
+		tracked_target()
+	elif hikmatz in ["0","00"]:
+		menu()
+	else:
+		jalan(f"{garis} isi yang benar")
+		pilpil()
+			
+def tracked_sendiri():
+	a = requests.get("http://ip-api.com/json/",headers={"Referer":"http://ip-api.com/","Content-Type":"application/json; charset=utf-8","User-Agent":"Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]"}).json()
+	try:ip = a["query"]
+	except KeyError:
+		ip = " "
+	try:bn = a["status"]
+	except KeyError:
+		bn = " "
+	try:ng = a["country"]
+	except KeyError:
+		ng = " "
+	try:cc = a["countryCode"]
+	except KeyError:
+		cc = " "
+	try:pr = a["regionName"]
+	except KeyError:
+		pr = " "
+	try:kt = a["city"]
+	except KeyError:
+		kt = " "
+	try:kb = a["zip"]
+	except KeyError:
+		kb = " "
+	try:tz = a["timezone"]
+	except KeyError:
+		tz = " "
+	try:sp = a["isp"]
+	except KeyError:
+		sp = " "
+	jalan(f"\n{garis} status : {bn}")
+	jalan(f"{garis} IP kamu : {ip}")
+	jalan(f"{garis} negara kamu : {ng}")
+	jalan(f"{garis} kode negara : {cc}")
+	jalan(f"{garis} provinsi : {pr}")
+	jalan(f"{garis} kota  : {kt}")
+	jalan(f"{garis} kode pos : {kb}")
+	jalan(f"{garis} zona waktu : {tz}")
+	jalan(f"{garis} provider : {sp}")
+	jalan(f"{garis} ingfo full : http://ip-api.com/#{ip}")
+	input(f"{garis} enter untuk kembali ")
+	menu()
+	
+def tracked_target():
+	print("")
+	x=f"{P2}contoh ip : {K2}193.34.56.125"
+	vprint(panel(x,style=f"{H3}"))
+	hm = input(f"{garis} ip target : {H}") 
+	a = requests.get("http://ip-api.com/json/"+hm,headers={"Referer":"http://ip-api.com/","Content-Type":"application/json; charset=utf-8","User-Agent":"Mozilla/5.0 (Linux; Android 10; Mi 9T Pro Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.181 Mobile Safari/537.36[FBAN/EMA;FBLC/it_IT;FBAV/239.0.0.10.109;]"}).json()
+	try:ip = a["query"]
+	except KeyError:
+		ip = " "
+	try:bn = a["status"]
+	except KeyError:
+		bn = " "
+	try:ng = a["country"]
+	except KeyError:
+		ng = " "
+	try:cc = a["countryCode"]
+	except KeyError:
+		cc = " "
+	try:pr = a["regionName"]
+	except KeyError:
+		pr = " "
+	try:kt = a["city"]
+	except KeyError:
+		kt = " "
+	try:kb = a["zip"]
+	except KeyError:
+		kb = " "
+	try:tz = a["timezone"]
+	except KeyError:
+		tz = " "
+	try:sp = a["isp"]
+	except KeyError:
+		sp = " "
+	jalan(f"\n{garis} status : {bn}")
+	jalan(f"{garis} IP target : {ip}")
+	jalan(f"{garis} negara target : {ng}")
+	jalan(f"{garis} kode negara : {cc}")
+	jalan(f"{garis} provinsi : {pr}")
+	jalan(f"{garis} kota  : {kt}")
+	jalan(f"{garis} kode pos : {kb}")
+	jalan(f"{garis} zona waktu : {tz}")
+	jalan(f"{garis} provider : {sp}")
+	jalan(f"{garis} ingfo full : http://ip-api.com/#{ip}")
+	input(f"{garis} enter untuk kembali ")
+	menu()
+	
+
 			
 def dump_public():
 	try:
@@ -445,13 +551,22 @@ def dump_post():
 		input(f"{garis} kembali ");menu()
 
 def dump_publicv2():
+	tutlu=[]
 	it = input(f"{garis} id target :"+H+" ")
 	try:
 		token = open('token.txt','r').read()
 		cookie = open('cookie.txt','r').read()
 		coki = {"cookie":cookie}
+		ka = requests.get('https://graph.facebook.com/%s?fields=friends.limit(90000)&access_token=%s'%(it,token),cookies=coki)
+		oioo = json.loads(ka.text)
+		for fuck in oioo['friends']['data']:
+			tutlu.append(fuck['id'])
+		token = open('token.txt','r').read()
+		cookie = open('cookie.txt','r').read()
+		coki = {"cookie":cookie}
 		cyna = requests.get('https://graph.facebook.com/%s?access_token=%s'%(it,token),cookies=coki).json()
 		print(f"{garis} name : %s%s"%(H,cyna['name']))
+		print(f"{garis} total friends : {H}{len(tutlu)}")
 	except (KeyError,IOError):
 		jalan(f"{garis} cookie kadaluarsa")
 		login()
@@ -460,7 +575,7 @@ def dump_publicv2():
 	ttl_tar=[]
 	tlo=[]
 	idl=[]
-	lim = input(f"{garis} limit dump :"+H+" ")
+	lim = input(f"{garis} limit dump id :"+H+" ")
 	token = open('token.txt','r').read()
 	cookie = open('cookie.txt','r').read()
 	coki = {"cookie":cookie}
@@ -468,6 +583,7 @@ def dump_publicv2():
 	oioo = json.loads(ka.text)
 	for fuck in oioo['friends']['data']:
 		tl.append(fuck['id'])
+	print("")
 	x=f"{P2}[01] id urutan new\n{P2}[02] id urutan old\n{P2}[03] id urutan random"
 	vprint(panel(x,style=f"{H3}"))
 	GlukTzy = input(garis+" pilih : "+H)
@@ -505,16 +621,6 @@ def dump_publicv2():
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
 			ciner = requests.get('https://graph.facebook.com/%s?access_token=%s'%(uik,token),cookies=coki).json()
-			#token = open('token.txt','r').read()
-			#cookie = open('cookie.txt','r').read()
-			#coki = {"cookie":cookie}
-			#cyna = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(idl,token),cookies=coki)
-			#eil = json.loads(cyna.text)
-			#try:
-				#for fuck in eil['subscribers']['data']:
-					#tlo.append(fuck['id']+'|'+fuck['name'])
-			#except KeyError:
-				#continue
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
@@ -523,15 +629,9 @@ def dump_publicv2():
 			try:
 				for fuck in eil['friends']['data']:
 					to.append(fuck['id']+'|'+fuck['name'])
-			#token = open('token.txt','r').read()
-			#cookie = open('cookie.txt','r').read()
-			#coki = {"cookie":cookie}
-			#u = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(id,token),cookies=coki)
-			#op = json.loads(u.text)
-			#try:
 			except KeyError:
 				continue
-			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK TARGET : {ciner['link']}\n└─ FRIENDS : {len(to)}"
+			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK : {ciner['link']}\n└─ FRIENDS : {len(to)}"
 			vprint(panel(x,style=f"{warna_warni_rich}"))
 			to.clear()
 		except KeyError:
@@ -543,13 +643,22 @@ def dump_publicv2():
 	menu()
 
 def dump_followersv2():
+	tutlu=[]
 	it = input(f"{garis} id target :"+H+" ")
 	try:
 		token = open('token.txt','r').read()
 		cookie = open('cookie.txt','r').read()
 		coki = {"cookie":cookie}
+		ka = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(it,token),cookies=coki)
+		oioo = json.loads(ka.text)
+		for fuck in oioo['subscribers']['data']:
+			tutlu.append(fuck['id'])
+		token = open('token.txt','r').read()
+		cookie = open('cookie.txt','r').read()
+		coki = {"cookie":cookie}
 		cyna = requests.get('https://graph.facebook.com/%s?access_token=%s'%(it,token),cookies=coki).json()
 		print(f"{garis} name : %s%s"%(H,cyna['name']))
+		print(f"{garis} total followers : {H}{len(tutlu)}")
 	except (KeyError,IOError):
 		jalan(f"{garis} cookie kadaluarsa")
 		login()
@@ -603,16 +712,6 @@ def dump_followersv2():
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
 			ciner = requests.get('https://graph.facebook.com/%s?access_token=%s'%(uik,token),cookies=coki).json()
-			#token = open('token.txt','r').read()
-			#cookie = open('cookie.txt','r').read()
-			#coki = {"cookie":cookie}
-			#cyna = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(idl,token),cookies=coki)
-			#eil = json.loads(cyna.text)
-			#try:
-				#for fuck in eil['subscribers']['data']:
-					#tlo.append(fuck['id']+'|'+fuck['name'])
-			#except KeyError:
-				#continue
 			token = open('token.txt','r').read()
 			cookie = open('cookie.txt','r').read()
 			coki = {"cookie":cookie}
@@ -621,15 +720,9 @@ def dump_followersv2():
 			try:
 				for fuck in eil['subscribers']['data']:
 					to.append(fuck['id']+'|'+fuck['name'])
-			#token = open('token.txt','r').read()
-			#cookie = open('cookie.txt','r').read()
-			#coki = {"cookie":cookie}
-			#u = requests.get('https://graph.facebook.com/%s?fields=subscribers.limit(90000)&access_token=%s'%(id,token),cookies=coki)
-			#op = json.loads(u.text)
-			#try:
 			except KeyError:
 				continue
-			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK TARGET : {ciner['link']}\n└─ FOLLOWERS : {len(to)}"
+			x=f"{P2}┌─ ID : {uik}\n{P2}│ └─ NAMA : {ciner['name']}\n│ └─ LOKASI : {ciner['locale']}\n│ ┌─ LINK : {ciner['link']}\n└─ FOLLOWERS : {len(to)}"
 			vprint(panel(x,style=f"{warna_warni_rich}"))
 			to.clear()
 		except KeyError:
