@@ -38,6 +38,6 @@ $ cd DMF
 
 $ git pull
 
-$ python dmf_enc.py
+$ python dmf.py
 
 # PAKE IYA FOLLOW KAGAK.. KONTOL LU
