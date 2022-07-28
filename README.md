@@ -1,4 +1,4 @@
-# DUMP ID MANUAL NO CRACK FB
+# DUMP ID MANUAL NO CRACK FB & TRACKER IP
 
 # install bahan²
 
@@ -41,3 +41,4 @@ $ git pull
 $ python dmf.py
 
 # PAKE IYA FOLLOW KAGAK.. KONTOL LU
+
